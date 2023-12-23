@@ -33,7 +33,9 @@ public class PlayerMove : MonoBehaviour
 
 
     private float _horizontal;
-    //private float _vertical;
+    private float _vertical;
+    private float _isLadder;
+    private float _isClimbing;
     private bool _isOnGround;
     private bool _isJumping;
     private bool _isDash;
@@ -236,21 +238,6 @@ public class PlayerMove : MonoBehaviour
     }
        
 
-    //private void Flip(float horizontal)
-    //{
-    //    // Move right -> left
-    //    if (horizontal < 0)
-    //    {
-    //        playerModel.localScale = new Vector3(baseScale.x * -1f, baseScale.y, baseScale.z);
-    //    }
-
-    //    // Move left -> right
-    //    if (horizontal > 0)
-    //    {
-    //        playerModel.localScale = baseScale;
-    //    }
-    //}
-
     private void FixedUpdate()
     {
       
@@ -260,32 +247,7 @@ public class PlayerMove : MonoBehaviour
         Walk,
         Run
     }
-    //private void OnCollisionStay2D(Collision2D collision)
-    //{
-    //    if (collision.transform.CompareTag("Ground"))
-    //    {
-    //        _isOnGround = true;
-    //    }
-    //}
-
-    //private void OnCollisionEnter2D(Collision2D collision)
-    //{
-    //    if (!collision.transform.CompareTag("Ground"))
-    //    {
-    //        return;
-    //    }
-        
-    //    _isJumping = false;
-    //    _jumpCount = default;
-    //}
-
-    //private void OnCollisionExit2D(Collision2D collision)
-    //{
-    //    if (collision.transform.CompareTag("Ground"))
-    //    {
-    //        _isOnGround = false;
-    //    }
-    //}
+  
     private void OnDrawGizmosSelected()
     {
         //Draw the ground detection circle
