@@ -4,7 +4,7 @@ using Cainos.CustomizablePixelCharacter;
 using System;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.Windows;
+
 
 
 
@@ -33,9 +33,7 @@ public class PlayerMove : MonoBehaviour
 
 
     private float _horizontal;
-    private float _vertical;
-    private float _isLadder;
-    private float _isClimbing;
+    //private float _vertical;
     private bool _isOnGround;
     private bool _isJumping;
     private bool _isDash;
@@ -88,9 +86,9 @@ public class PlayerMove : MonoBehaviour
         {
             _horizontal = 0.0f;
         }
-        
+      
         //jumpButton.onClick.AddListener(() => Jump(ref _isOnGround, ref _isJumping));
-        
+
 
         //if (Input.GetKeyDown(KeyCode.Z))
         //{
@@ -120,9 +118,10 @@ public class PlayerMove : MonoBehaviour
             if (colliders[i].isTrigger) continue;
             if (colliders[i].gameObject != gameObject) _isOnGround = true;
         }
+    
+
         Move(inputRun);
-        // Flip(_horizontal);
-        //CheckAnimation(_horizontal, rigidBody.velocity.y, _isOnGround);
+       
     }
 
     private void Init()
@@ -130,8 +129,7 @@ public class PlayerMove : MonoBehaviour
         Application.targetFrameRate = 60;
 
         _horizontal = 0.0f;
-        //_vertical = default;
-        //_isOnGround = default;
+        _isOnGround = default;
         _isJumping = default;
         _isDash = default;
         _jumpCount = default;
@@ -219,18 +217,16 @@ public class PlayerMove : MonoBehaviour
           //no horizontal movement input, brake to speed zero
         else
         {
-            Debug.Log("khong di dc");
+            
             curVel.x = 0.0f;// Mathf.MoveTowards(curVel.x, 0.0f, brakeAcc * Time.deltaTime);
         }
+      
         if (curVel.y > 0)
         {
             curVel.y += Physics.gravity.y * (fallGravityMutiplier - 1.0f) * Time.deltaTime;
         }
-
-
          rb2d.velocity = curVel;
-         float movingBlend = Mathf.Abs(curVel.x) / MoveSpeed;
-         Debug.Log($"fx.MovingBlend={fx.MovingBlend}");
+         float movingBlend = Mathf.Abs(curVel.x) / MoveSpeed;    
          fx.MovingBlend = Mathf.Abs(curVel.x) / MoveSpeed;
          fx.SpeedVertical = curVel.y;
          fx.Facing = Mathf.RoundToInt(_horizontal);
@@ -247,12 +243,15 @@ public class PlayerMove : MonoBehaviour
         Walk,
         Run
     }
-  
+
     private void OnDrawGizmosSelected()
     {
         //Draw the ground detection circle
         Gizmos.color = Color.white;
         Vector2 worldPos = transform.position;
         Gizmos.DrawWireSphere(worldPos + posBot, groundCheckRadius);
+
     }
+   
+
 }
