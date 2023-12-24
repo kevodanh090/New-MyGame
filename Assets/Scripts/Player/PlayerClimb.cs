@@ -6,15 +6,22 @@ using UnityEngine;
 public class PlayerClimb : MonoBehaviour
 {
     private float _vertical;
+    private float _horizontal;
     private float _speed = 8f;
     private bool _isLadder;
     private bool _isClimbing;
+    private bool _isOnGround;
+    private bool _isJumping;
+
 
     [SerializeField] private Joystick joyStick;
     [SerializeField] private Rigidbody2D rb2;
     [SerializeField] private float fallGravityMutiplier = 1.3f;
     [SerializeField] private float groundCheckRadius = 0.17f;
-    
+    [SerializeField] private Transform playerModel;
+    [SerializeField] private float JumpForce = 5f;
+    [SerializeField] private float jumpSpeed = 9.0f;
+
     // Update is called once per frame
     void Update()
     {
@@ -22,16 +29,18 @@ public class PlayerClimb : MonoBehaviour
         {
             _vertical = 1.0f;
         }
+        else
         if (joyStick.Vertical <= -.2f)
         {
             _vertical = -1.0f;
         }
+        else { _vertical = 0.0f;}
+
         if (_isLadder && Mathf.Abs(_vertical) > 0.01f)
         {
             _isClimbing = true;
         }
-        
-
+     
 
     }
    
@@ -42,10 +51,12 @@ public class PlayerClimb : MonoBehaviour
     private void Init()
     {
         _isClimbing = default;
-    }
+        _isClimbing = default;
+         _isOnGround = default;
+}
     private void FixedUpdate()
     {
-
+        
        Climb(ref _isClimbing);
     }
     private void Climb(ref bool _isClimbing)
@@ -59,13 +70,13 @@ public class PlayerClimb : MonoBehaviour
             {
 
                 
-                rb2.velocity = new Vector2(rb2.velocity.x, _vertical * _speed);
+                rb2.velocity = new Vector2(rb2.velocity.x, jumpSpeed * _speed);
                 
                 
             }
             if (_vertical < 0)
             {
-                rb2.velocity = new Vector2(rb2.velocity.x, _vertical * _speed);
+                rb2.velocity = new Vector2(rb2.velocity.x, jumpSpeed * _speed);
                 
             }
             _isClimbing = false;
@@ -76,18 +87,65 @@ public class PlayerClimb : MonoBehaviour
         //    curVel.y += Physics.gravity.y * (fallGravityMutiplier - 1.0f) * Time.deltaTime;
         //}
     }
+    public void Jump()
+    {
+        if (!_isOnGround || _isJumping)
+        {
+            //if (_jumpCount >= JumpMax)
+            //{
+            //    return;
+            //}
+            return;
+        }
+
+        _isOnGround = false;
+        _isJumping = true;
+        //_jumpCount++;
+        rb2.velocity = new Vector2(rb2.velocity.x, jumpSpeed /* _speed*/);
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Ladder"))
         {
+            //if(Mathf.Abs(_vertical) > 0.01f)
+            //{
+            //    _isLadder = true;
+            //}
+            //else 
+            //{ _isLadder = false; }
+
             _isLadder = true;
-            //_isClimbing = false;
-            _vertical = 0.09f;
-            
+
+
         }
 
     }
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        if (collision.transform.CompareTag("Ground"))
+        {
+            _isOnGround = true;
+        }
+    }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (!collision.transform.CompareTag("Ground"))
+        {
+            return;
+        }
+
+        _isJumping = false;
+        //_jumpCount = default;
+    }
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.transform.CompareTag("Ground"))
+        {
+            _isOnGround = false;
+        }
+    }
+
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.CompareTag("Ladder"))
@@ -95,7 +153,7 @@ public class PlayerClimb : MonoBehaviour
             _isLadder = false;
             _isClimbing = false;
             rb2.gravityScale = 1.3f;
-            _vertical = 0.0f;
+            //_vertical = 0.0f;
         }
     }
   

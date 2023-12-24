@@ -59,10 +59,14 @@ public class PlayerMove : MonoBehaviour
 
     public float airSpeedMax = 2.0f;                        // max move speed while in air
     public float airAcc = 8.0f;                             // air acceleration
-    
+
+    public float jumpSpeed = 5.0f;                          // speed applied to character when jump
+    public float jumpCooldown = 0.55f;                      // time to be able to jump again after landing
+    public float jumpGravityMutiplier = 0.6f;               // gravity multiplier when character is jumping, should be within [0.0,1.0], set it to lower value so that the longer you press the jump button, the higher the character can jump    
+    public float fallGravityMutiplier = 1.3f;               // gravity multiplier when character is falling, should be equal or greater than 1.0
     public float groundCheckRadius = 0.17f;                 // radius of the circle at the character's bottom to determine whether the character is on ground
-    public float fallGravityMutiplier = 1.3f;
     public event Action PlayerMoveDownPlatform;
+    private float jumpTimer;
 
     private void Awake()
     {
@@ -184,7 +188,7 @@ public class PlayerMove : MonoBehaviour
         if (_isOnGround)
         {
           acc = inputRunning ? runAcc : walkAcc;
-          max = inputRunning ? MoveSpeed : walkSpeedMax;
+          max = inputRunning ? runSpeedMax : MoveSpeed;
           brakeAcc = groundBrakeAcc;
 
         }
@@ -232,7 +236,7 @@ public class PlayerMove : MonoBehaviour
          fx.Facing = Mathf.RoundToInt(_horizontal);
          fx.IsGrounded = _isOnGround;
     }
-       
+
 
     private void FixedUpdate()
     {
