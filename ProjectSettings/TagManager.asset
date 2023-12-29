@@ -5,8 +5,13 @@ TagManager:
   serializedVersion: 2
   tags:
   - Ground
-  - New tag
   - Ladder
+  - Gate
+  - Item
+  - Trap
+  - New tag
+  - Key
+  - Book
   layers:
   - Default
   - TransparentFX

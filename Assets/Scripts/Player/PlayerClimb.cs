@@ -1,3 +1,4 @@
+using Cainos.CustomizablePixelCharacter;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -5,15 +6,6 @@ using UnityEngine;
 
 public class PlayerClimb : MonoBehaviour
 {
-    private float _vertical;
-    private float _horizontal;
-    private float _speed = 8f;
-    private bool _isLadder;
-    private bool _isClimbing;
-    private bool _isOnGround;
-    private bool _isJumping;
-
-
     [SerializeField] private Joystick joyStick;
     [SerializeField] private Rigidbody2D rb2;
     [SerializeField] private float fallGravityMutiplier = 1.3f;
@@ -22,6 +14,19 @@ public class PlayerClimb : MonoBehaviour
     [SerializeField] private float JumpForce = 5f;
     [SerializeField] private float jumpSpeed = 9.0f;
 
+    private float _vertical;
+    private float _horizontal;
+    private float _speed = 6.0f;
+    private bool _isLadder;
+    private bool _isClimbing;
+    private bool _isOnGround;
+    private bool _isJumping;
+    private int _jumpCount;
+    
+    private const int JumpMax = 2;
+    private PixelCharacter fx;
+
+ 
     // Update is called once per frame
     void Update()
     {
@@ -52,7 +57,7 @@ public class PlayerClimb : MonoBehaviour
     {
         _isClimbing = default;
         _isClimbing = default;
-         _isOnGround = default;
+        _isOnGround = default;
 }
     private void FixedUpdate()
     {
@@ -61,8 +66,10 @@ public class PlayerClimb : MonoBehaviour
     }
     private void Climb(ref bool _isClimbing)
     {
-        if(_isClimbing)
+        if (GameController.isDead) return;
+        if (_isClimbing)
         {
+           
             //curVel = rb2.velocity;
             Debug.Log($" _vertical= {_vertical}");
             rb2.gravityScale = 0.0f;
@@ -70,13 +77,13 @@ public class PlayerClimb : MonoBehaviour
             {
 
                 
-                rb2.velocity = new Vector2(rb2.velocity.x, jumpSpeed * _speed);
+                rb2.velocity = new Vector2(rb2.velocity.x, _vertical * _speed);
                 
                 
             }
             if (_vertical < 0)
             {
-                rb2.velocity = new Vector2(rb2.velocity.x, jumpSpeed * _speed);
+                rb2.velocity = new Vector2(rb2.velocity.x, _vertical * _speed);
                 
             }
             _isClimbing = false;
@@ -89,38 +96,23 @@ public class PlayerClimb : MonoBehaviour
     }
     public void Jump()
     {
+        if (GameController.isDead) return;
         if (!_isOnGround || _isJumping)
         {
-            //if (_jumpCount >= JumpMax)
-            //{
-            //    return;
-            //}
+            if (_jumpCount >= JumpMax)
+            {
+                return;
+            }
             return;
         }
 
         _isOnGround = false;
         _isJumping = true;
-        //_jumpCount++;
-        rb2.velocity = new Vector2(rb2.velocity.x, jumpSpeed /* _speed*/);
+        _jumpCount++;
+        rb2.velocity = new Vector2(rb2.velocity.x, 8.0f /* _speed*/);
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Ladder"))
-        {
-            //if(Mathf.Abs(_vertical) > 0.01f)
-            //{
-            //    _isLadder = true;
-            //}
-            //else 
-            //{ _isLadder = false; }
-
-            _isLadder = true;
-
-
-        }
-
-    }
+    
     private void OnCollisionStay2D(Collision2D collision)
     {
         if (collision.transform.CompareTag("Ground"))
@@ -136,7 +128,7 @@ public class PlayerClimb : MonoBehaviour
         }
 
         _isJumping = false;
-        //_jumpCount = default;
+        _jumpCount = default;
     }
     private void OnCollisionExit2D(Collision2D collision)
     {
@@ -144,6 +136,22 @@ public class PlayerClimb : MonoBehaviour
         {
             _isOnGround = false;
         }
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Ladder"))
+        {
+            //if(Mathf.Abs(_vertical) > 0.01f)
+            //{
+            //    _isLadder = true;
+            //}
+            //else 
+            //{ _isLadder = false; }
+
+            _isLadder = true;
+
+        }
+
     }
 
     private void OnTriggerExit2D(Collider2D collision)

@@ -1,0 +1,123 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &5415933664389832972
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1049023302621363165, guid: 25584850e7e66bf47a53eeec0ab883cb, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -5.58
+      objectReference: {fileID: 0}
+    - target: {fileID: 1049023302621363165, guid: 25584850e7e66bf47a53eeec0ab883cb, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.373
+      objectReference: {fileID: 0}
+    - target: {fileID: 1049023302621363165, guid: 25584850e7e66bf47a53eeec0ab883cb, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1049023302621363165, guid: 25584850e7e66bf47a53eeec0ab883cb, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1049023302621363165, guid: 25584850e7e66bf47a53eeec0ab883cb, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1049023302621363165, guid: 25584850e7e66bf47a53eeec0ab883cb, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1049023302621363165, guid: 25584850e7e66bf47a53eeec0ab883cb, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1049023302621363165, guid: 25584850e7e66bf47a53eeec0ab883cb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1049023302621363165, guid: 25584850e7e66bf47a53eeec0ab883cb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1049023302621363165, guid: 25584850e7e66bf47a53eeec0ab883cb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1049023302621363167, guid: 25584850e7e66bf47a53eeec0ab883cb, type: 3}
+      propertyPath: m_Name
+      value: PF Village Props - Spike Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 1049023302621363167, guid: 25584850e7e66bf47a53eeec0ab883cb, type: 3}
+      propertyPath: m_TagString
+      value: Trap
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1049023302621363167, guid: 25584850e7e66bf47a53eeec0ab883cb, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1054182046377779364}
+  m_SourcePrefab: {fileID: 100100000, guid: 25584850e7e66bf47a53eeec0ab883cb, type: 3}
+--- !u!1 &5019160474224384723 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1049023302621363167, guid: 25584850e7e66bf47a53eeec0ab883cb, type: 3}
+  m_PrefabInstance: {fileID: 5415933664389832972}
+  m_PrefabAsset: {fileID: 0}
+--- !u!68 &1054182046377779364
+EdgeCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5019160474224384723}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_EdgeRadius: 0
+  m_Points:
+  - {x: -0.45308352, y: -0.000115036964}
+  - {x: -0.45719624, y: 0.16923404}
+  - {x: -0.37302017, y: 0.37934184}
+  - {x: -0.25323248, y: 0.16613835}
+  - {x: -0.1620655, y: 0.39631054}
+  - {x: -0.08472967, y: 0.18270239}
+  - {x: 0.009397507, y: 0.3913172}
+  - {x: 0.11185932, y: 0.17645347}
+  - {x: 0.1900258, y: 0.3941173}
+  - {x: 0.2898364, y: 0.1706686}
+  - {x: 0.39054108, y: 0.39077145}
+  - {x: 0.47653723, y: 0.11715084}
+  - {x: 0.4843545, y: -0.015750587}
+  m_AdjacentStartPoint: {x: 0, y: 0}
+  m_AdjacentEndPoint: {x: 0, y: 0}
+  m_UseAdjacentStartPoint: 0
+  m_UseAdjacentEndPoint: 0

@@ -18,19 +18,7 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] private float MoveSpeed = 2.5f;
     [SerializeField] private float JumpForce = 5f;
     [SerializeField] private MovementType defaultMovement = MovementType.Walk;
-    [ExposeProperty]                                        // is the character dead? if dead, plays dead animation and disable control
-    public bool IsDead
-    {
-        get { return isDead; }
-        set
-        {
-            isDead = value;
-            fx.IsDead = isDead;
-            fx.DropWeapon();
-        }
-    }
-    private bool isDead;
-
+  
 
     private float _horizontal;
     //private float _vertical;
@@ -91,23 +79,6 @@ public class PlayerMove : MonoBehaviour
             _horizontal = 0.0f;
         }
       
-        //jumpButton.onClick.AddListener(() => Jump(ref _isOnGround, ref _isJumping));
-
-
-        //if (Input.GetKeyDown(KeyCode.Z))
-        //{
-        //    Dash();
-        //}
-
-        //if (Input.GetKeyDown(KeyCode.S))
-        //{
-        //    _moveDownCount++;
-        //    if (_moveDownCount >= 1)
-        //    {
-        //        MoveDownPlatform();
-        //        _moveDownCount = default;
-        //    }
-        //}
         bool inputRun = false;
        // bool inputCrounch = false;
         bool inputMoveModifier = false;
@@ -140,43 +111,16 @@ public class PlayerMove : MonoBehaviour
         _moveDownCount = default;
     }
 
-    //private void CheckAnimation(float horizontal, float yVelocity, bool isGrounded)
-    //{
-    //    animationController.CheckAnimation(horizontal, yVelocity, isGrounded);
-    //}
-
+ 
     private void Start()
     {
         posBot = collider2d.offset - new Vector2(0.0f, collider2d.size.y * 0.5f);
         posTop = collider2d.offset + new Vector2(0.0f, collider2d.size.y * 0.5f);
     }
 
-    //private void Dash()
-    //{
-    //    _isDash = true;
-    //    rb2d.AddForce(new Vector2(1f, 0f) * JumpForce, ForceMode2D.Impulse);
-    //    //_isDash = false;
-    //}
-
-    //private void Jump(ref bool isOnGround, ref bool isJumping)
-    //{
-    //    if (!isOnGround || isJumping)
-    //    {
-    //        if (_jumpCount >= JumpMax)
-    //        {
-    //            return;
-    //        }
-    //    }
-
-    //    isOnGround = false;
-    //    isJumping = true;
-    //    _jumpCount++;
-    //    //rb2d.AddForce(new Vector2(0, 1f) * JumpForce, ForceMode2D.Impulse);
-    //}
-
     private void Move(bool inputRunning)
     {
-        if (isDead) return;
+        if (GameController.isDead) return;
 
         //GET CURRENT SPEED FROM RIGIDBODY
 
